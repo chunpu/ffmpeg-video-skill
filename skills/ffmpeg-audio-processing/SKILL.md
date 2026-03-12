@@ -10,14 +10,14 @@ tags: ["ffmpeg", "audio", "processing", "conversion", "compression"]
 
 > 目标：提供最常用、最实用的 FFmpeg 音频处理命令，按需求频次从高到低排序
 
-## 0. 音频属性查看
+## 音频属性查看
 
 ```bash
 # 查看音频属性
 ffmpeg -i input.mp3 2>&1
 ```
 
-## 1. 音频格式转换（最常用）
+## 音频格式转换（最常用）
 
 ```bash
 # MP3 转 WAV（无损）
@@ -39,7 +39,7 @@ ffmpeg -i input.mp3 -c:a libvorbis -q:a 4 output.ogg
 ffmpeg -i input.wav -c:a flac output.flac
 ```
 
-## 2. 音频压缩
+## 音频压缩
 
 ```bash
 # MP3 压缩（VBR 2，平衡质量与大小）
@@ -57,7 +57,7 @@ for file in *.mp3; do
 done
 ```
 
-## 3. 音频裁剪
+## 音频裁剪
 
 ```bash
 # 从第 30 秒开始，截取 1 分钟
@@ -73,7 +73,7 @@ ffmpeg -i input.mp3 -ss 00:01:00 -c copy output.mp3
 ffmpeg -i input.mp3 -ss 00:00:10 -to 00:00:40 -c:a libmp3lame -q:a 0 output.mp3
 ```
 
-## 4. 音频拼接
+## 音频拼接
 
 ```bash
 # 快速拼接（不重新编码，格式必须一致）
@@ -87,7 +87,7 @@ ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp3
 ffmpeg -f concat -safe 0 -i filelist.txt -c:a libmp3lame -q:a 0 output.mp3
 ```
 
-## 5. 音量调整
+## 音量调整
 
 ```bash
 # 音量加倍
@@ -109,7 +109,7 @@ ffmpeg -i input.mp3 -filter:a "loudnorm" output.mp3
 ffmpeg -i input.mp3 -filter:a "volumedetect" -f null /dev/null
 ```
 
-## 6. 从视频提取音频
+## 从视频提取音频
 
 ```bash
 # 提取为 MP3（高质量）
@@ -125,7 +125,7 @@ ffmpeg -i video.mp4 -c:a aac -b:a 256k audio.m4a
 ffmpeg -i video.mp4 -ss 00:00:10 -to 00:00:30 -q:a 0 audio.mp3
 ```
 
-## 7. 音频混音
+## 音频混音
 
 ```bash
 # 两个音频混合（背景音乐 + 人声）
@@ -135,7 +135,7 @@ ffmpeg -i background.mp3 -i voice.mp3 -filter_complex "amix=inputs=2:duration=lo
 ffmpeg -i background.mp3 -i voice.mp3 -filter_complex "[0:a]volume=0.3[a0];[1:a]volume=1.0[a1];[a0][a1]amix=inputs=2:duration=longest" output.mp3
 ```
 
-## 8. 音频淡入淡出
+## 音频淡入淡出
 
 ```bash
 # 开头 3 秒淡入
@@ -148,7 +148,7 @@ ffmpeg -i input.mp3 -af "afade=t=out:st=57:d=3" output.mp3
 ffmpeg -i input.mp3 -af "afade=t=in:st=0:d=3,afade=t=out:st=57:d=3" output.mp3
 ```
 
-## 9. 音频声道处理
+## 音频声道处理
 
 ```bash
 # 立体声转单声道
@@ -167,7 +167,7 @@ ffmpeg -i input.mp3 -af "pan=mono|c0=FL" output_left.mp3
 ffmpeg -i input.mp3 -af "pan=mono|c0=FR" output_right.mp3
 ```
 
-## 10. 音频采样率调整
+## 音频采样率调整
 
 ```bash
 # 改为 44100 Hz（CD 质量）
@@ -180,7 +180,7 @@ ffmpeg -i input.mp3 -ar 48000 output.mp3
 ffmpeg -i input.mp3 -ar 22050 output.mp3
 ```
 
-## 11. 音频静音检测与移除
+## 音频静音检测与移除
 
 ```bash
 # 检测静音部分
@@ -196,14 +196,14 @@ ffmpeg -i input.mp3 -af "silenceremove=stop_periods=1:stop_duration=1:stop_thres
 ffmpeg -i input.mp3 -af "silenceremove=start_periods=1:start_duration=1:start_threshold=-50dB:stop_periods=1:stop_duration=1:stop_threshold=-50dB" output.mp3
 ```
 
-## 12. 音频倒放
+## 音频倒放
 
 ```bash
 # 音频倒放
 ffmpeg -i input.mp3 -filter:a "areverse" output_reversed.mp3
 ```
 
-## 13. 音频变速
+## 音频变速
 
 ```bash
 # 2倍速播放
@@ -216,7 +216,7 @@ ffmpeg -i input.mp3 -filter:a "atempo=0.5" output_0.5x.mp3
 ffmpeg -i input.mp3 -filter:a "atempo=1.5" output_1.5x.mp3
 ```
 
-## 14. 音频分割
+## 音频分割
 
 ```bash
 # 将音频分割成多个 5 分钟的片段
@@ -227,7 +227,7 @@ ffmpeg -i input.mp3 -t 00:05:00 -c copy part1.mp3
 ffmpeg -i input.mp3 -ss 00:05:00 -c copy part2.mp3
 ```
 
-## 15. 批量处理
+## 批量处理
 
 ```bash
 # 批量转换为 MP3
