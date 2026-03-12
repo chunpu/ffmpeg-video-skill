@@ -2,28 +2,22 @@
 
 这是一个基于 FFmpeg 的媒体处理技能集合，为 AI 助手提供实用的日常媒体处理命令。
 
-## 功能概览
-
-| Skill | 描述 | 主要功能 |
-|-------|------|---------|
-| **[ffmpeg-video-processing](./skills/ffmpeg-video-processing)** | 视频处理 | 格式转换、压缩、裁剪、拼接、速度控制、水印、特效、字幕等 |
-| **[ffmpeg-audio-processing](./skills/ffmpeg-audio-processing)** | 音频处理 | 格式转换、压缩、裁剪、拼接、音量调整、去噪降噪、音高修正等 |
-| **[ffmpeg-image-processing](./skills/ffmpeg-image-processing)** | 图片处理 | 格式转换、压缩、尺寸调整、裁剪、旋转、水印、特效等 |
-| **[ffmpeg-install](./skills/ffmpeg-install)** | 安装与检查 | 跨平台安装指南、环境检查、验证安装 |
-
-## 如何安装这些 Agent Skill
-
-这些技能是为 AI 助手（如 Trae AI）设计的，AI 助手会自动识别和加载这些技能。
-
-### 方法一：使用 npx skills add 安装（推荐）
+##  Install
 
 ```bash
 npx skills add https://github.com/chunpu/ffmpeg-skills
 ```
 
+## 功能概览
+
+- **[ffmpeg-video-processing](./skills/ffmpeg-video-processing)** - 视频处理：格式转换、压缩、裁剪、拼接、速度控制、水印、特效、字幕等
+- **[ffmpeg-audio-processing](./skills/ffmpeg-audio-processing)** - 音频处理：格式转换、压缩、裁剪、拼接、音量调整、去噪降噪、音高修正等
+- **[ffmpeg-image-processing](./skills/ffmpeg-image-processing)** - 图片处理：格式转换、压缩、尺寸调整、裁剪、旋转、水印、特效等
+- **[ffmpeg-install](./skills/ffmpeg-install)** - 安装与检查：跨平台安装指南、环境检查、验证安装
+
 ### 前置条件
 
-在使用这些 skill 之前，需要先安装 FFmpeg。详细的安装指南请参考 [ffmpeg-install](./skills/ffmpeg-install) 技能。
+在使用这些 skill 之前，需要先看看系统是否有 ffmpeg 命令。
 
 ## 技能特点
 

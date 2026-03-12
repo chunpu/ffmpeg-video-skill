@@ -310,10 +310,6 @@ done
 # 查看图片基本信息
 ffmpeg -i input.jpg
 
-# 查看详细信息（尺寸、格式等）
-ffprobe -v error -select_streams v:0 -show_entries stream=width,height,codec_name,pix_fmt -of default=noprint_wrappers=1:nokey=1 input.jpg
-```
-
 ## 图片去除背景（简单方法）
 
 ```bash
