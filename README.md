@@ -15,33 +15,10 @@
 
 这些技能是为 AI 助手（如 Trae AI）设计的，AI 助手会自动识别和加载这些技能。
 
-### 安装步骤
+### 方法一：使用 npx skills add 安装（推荐）
 
-1. **克隆或下载此仓库**
-   ```bash
-   git clone https://github.com/chunpu/ffmpeg-video-skill.git
-   ```
-
-2. **在 AI 助手的工作区中打开此项目**
-   - 在 Trae AI 或其他支持 skill 的 AI 助手中打开此文件夹
-
-3. **AI 助手自动发现并使用**
-   - AI 助手会自动扫描 `skills/` 目录下的所有 skill
-   - 每个 skill 目录下都有 `SKILL.md` 文件，定义了 skill 的功能和使用方法
-
-### Skill 目录结构
-
-每个 skill 都遵循以下结构：
-```
-skills/
-├── ffmpeg-video-processing/
-│   └── SKILL.md          # Skill 定义文件
-├── ffmpeg-audio-processing/
-│   └── SKILL.md
-├── ffmpeg-image-processing/
-│   └── SKILL.md
-└── ffmpeg-install/
-    └── SKILL.md
+```bash
+npx skills add https://github.com/chunpu/ffmpeg-skills
 ```
 
 ### 前置条件
@@ -88,19 +65,6 @@ ffmpeg -i input.jpg -vf "scale=1920:-1" output.jpg
 ```
 
 更多详细示例请查看各个技能的 SKILL.md 文件。
-
-## 项目结构
-
-```
-ffmpeg-video-skill/
-├── skills/
-│   ├── ffmpeg-video-processing/    # 视频处理技能
-│   ├── ffmpeg-audio-processing/    # 音频处理技能
-│   ├── ffmpeg-image-processing/    # 图片处理技能
-│   └── ffmpeg-install/             # 安装与检查技能
-├── test-files/                      # 测试文件
-└── README.md
-```
 
 ## License
 
