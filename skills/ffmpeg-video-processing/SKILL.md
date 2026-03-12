@@ -263,9 +263,6 @@ ffmpeg -sseof -1 -i input.mp4 -update 1 -q:v 1 last_frame.jpg
 # 从第 5 秒获取一帧作为缩略图
 ffmpeg -i input.mp4 -ss 00:00:05 -vframes 1 thumbnail.jpg
 
-# 从视频中间获取一帧
-ffmpeg -i input.mp4 -vf "select=eq(n\,floor(N/2))" -vframes 1 thumbnail.jpg
-
 # 生成 10 张缩略图（均匀分布）
 ffmpeg -i input.mp4 -vf "select='not(mod(n\,floor(N/10)))'" -vframes 10 thumbnail_%04d.jpg
 
