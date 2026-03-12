@@ -256,13 +256,9 @@ ffmpeg -i input.mp4 -i palette.png -filter_complex "fps=10,scale=480:-1:flags=la
 # 提取第一帧
 ffmpeg -i input.mp4 -vframes 1 first_frame.jpg
 
-# 提取最后一帧（推荐，可靠方法）
+# 提取最后一帧（推荐方法）
 # -sseof -1 从结束前 1 秒开始，-update 1 不断更新最终只保留最后一帧
 ffmpeg -sseof -1 -i input.mp4 -update 1 -q:v 1 last_frame.jpg
-
-# 提取最后一帧（更准确，两步法）
-ffprobe -v error -select_streams v:0 -show_entries stream=nb_frames -of default=noprint_wrappers=1:nokey=1 input.mp4 > total_frames.txt
-ffmpeg -i input.mp4 -vf "select='eq(n,$(($(cat total_frames.txt)-1))'" -vframes 1 last_frame.jpg
 
 # 从第 5 秒获取一帧作为缩略图
 ffmpeg -i input.mp4 -ss 00:00:05 -vframes 1 thumbnail.jpg
