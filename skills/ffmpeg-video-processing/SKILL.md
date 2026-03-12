@@ -17,16 +17,12 @@ tags: ["ffmpeg", "video", "processing", "conversion", "compression"]
 ffmpeg -i input.mp4
 ```
 
----
-
 ## 视频转码
 
 ```bash
 # MKV/AVI/WebM/MOV 转 MP4（H.264 + AAC，所有设备都能播放）
 ffmpeg -i input.mkv -c:v libx264 -c:a aac output.mp4
 ```
-
----
 
 ## 视频压缩
 
@@ -40,8 +36,6 @@ ffmpeg -i input.mp4 -vf "scale=1280:720" -c:v libx264 -crf 26 -preset medium out
 # H.265 编码，文件比 H.264 小 30-50%
 ffmpeg -i input.mp4 -c:v libx265 -crf 28 -preset medium output_h265.mp4
 ```
-
----
 
 ## 视频裁剪
 
@@ -58,8 +52,6 @@ ffmpeg -i input.mp4 -ss 00:01:30 -c copy output.mp4
 # 精确裁剪（重新编码，更准确）
 ffmpeg -i input.mp4 -ss 00:00:10 -to 00:00:40 -c:v libx264 -crf 18 -c:a aac output.mp4
 ```
-
----
 
 ## 视频拼接
 
@@ -81,8 +73,6 @@ ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4
 ffmpeg -f concat -safe 0 -i filelist.txt -c:v libx264 -crf 18 -c:a aac output.mp4
 ```
 
----
-
 ## 提取音频
 
 ```bash
@@ -92,8 +82,6 @@ ffmpeg -i input.mp4 -q:a 0 -map a output.mp3
 # 提取为 WAV（无损，适合编辑）
 ffmpeg -i input.mp4 -vn -acodec pcm_s16le -ar 44100 -ac 2 output.wav
 ```
-
----
 
 ## 添加水印
 
@@ -111,8 +99,6 @@ ffmpeg -i input.mp4 -i logo.png -filter_complex "[1:v]format=rgba,colorchannelmi
 ffmpeg -i input.mp4 -vf "drawtext=text='Your Name':x=10:y=10:fontsize=24:fontcolor=white" output.mp4
 ```
 
----
-
 ## 视频转 GIF
 
 ```bash
@@ -123,8 +109,6 @@ ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos" -c:v gif output.gif
 ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,palettegen" palette.png
 ffmpeg -i input.mp4 -i palette.png -filter_complex "fps=10,scale=480:-1:flags=lanczos[x];[x][1:v]paletteuse" output.gif
 ```
-
----
 
 ## 生成缩略图
 
@@ -138,8 +122,6 @@ ffmpeg -i input.mp4 -vf "select=eq(n\,floor(N/2))" -vframes 1 thumbnail.jpg
 # 生成 10 张缩略图（均匀分布）
 ffmpeg -i input.mp4 -vf "select='not(mod(n\,floor(N/10)))'" -vframes 10 thumbnail_%04d.jpg
 ```
-
----
 
 ## 旋转/翻转视频
 
@@ -160,8 +142,6 @@ ffmpeg -i input.mp4 -vf "hflip" output.mp4
 ffmpeg -i input.mp4 -vf "vflip" output.mp4
 ```
 
----
-
 ## 调整音量
 
 ```bash
@@ -175,8 +155,6 @@ ffmpeg -i input.mp4 -filter:a "volume=0.5" output.mp4
 ffmpeg -i input.mp4 -filter:a "loudnorm" output.mp4
 ```
 
----
-
 ## 移除音频
 
 ```bash
@@ -184,16 +162,12 @@ ffmpeg -i input.mp4 -filter:a "loudnorm" output.mp4
 ffmpeg -i input.mp4 -c:v copy -an output_no_audio.mp4
 ```
 
----
-
 ## 替换音频
 
 ```bash
 # 用新音频替换原视频的音频
 ffmpeg -i input.mp4 -i new_audio.mp3 -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 -shortest output.mp4
 ```
-
----
 
 ## 分辨率调整
 
@@ -211,8 +185,6 @@ ffmpeg -i input.mp4 -vf "scale=1280:-1" output.mp4
 ffmpeg -i input.mp4 -vf "scale=-1:720" output.mp4
 ```
 
----
-
 ## 帧率调整
 
 ```bash
@@ -222,8 +194,6 @@ ffmpeg -i input.mp4 -r 30 output.mp4
 # 改为 60 fps（插帧，更流畅）
 ffmpeg -i input.mp4 -vf "minterpolate=fps=60" output_60fps.mp4
 ```
-
----
 
 ## 批量处理
 
@@ -246,10 +216,6 @@ for file in *.mp4; do
 done
 ```
 
----
-
----
-
 ## 常见问题修复
 
 ```bash
@@ -259,8 +225,6 @@ ffmpeg -i input.mp4 -c copy -fflags +genpts output.mp4
 # 修复损坏的视频
 ffmpeg -i input.mp4 -c copy -avoid_negative_ts 1 output.mp4
 ```
-
----
 
 ## 参数速查表
 
