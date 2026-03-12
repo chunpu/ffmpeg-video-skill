@@ -311,50 +311,8 @@ done
 ### 了解视频参数
 
 ```bash
-# 查看基本信息（最简单）
+# 查看基本信息（推荐，日常用这个就够了）
 ffmpeg -i input.mp4
-
-# 详细信息（JSON 格式，方便程序解析）
-ffprobe -v quiet -print_format json -show_format -show_streams input.mp4
-
-# 只查看视频流信息
-ffprobe -v quiet -select_streams v -show_entries stream=codec_name,width,height,bit_rate,r_frame_rate -of json input.mp4
-
-# 只查看音频流信息
-ffprobe -v quiet -select_streams a -show_entries stream=codec_name,channels,sample_rate,bit_rate -of json input.mp4
-
-# 获取视频时长（秒）
-ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input.mp4
-
-# 获取视频分辨率
-ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 input.mp4
-
-# 获取视频编码格式
-ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 input.mp4
-
-# 获取音频编码格式
-ffprobe -v error -select_streams a:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 input.mp4
-
-# 获取视频帧率
-ffprobe -v error -select_streams v:0 -show_entries stream=r_frame_rate -of default=noprint_wrappers=1:nokey=1 input.mp4
-
-# 获取视频比特率
-ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 input.mp4
-
-# 获取文件大小（字节）
-ffprobe -v error -show_entries format=size -of default=noprint_wrappers=1:nokey=1 input.mp4
-
-# 查看所有流的完整信息
-ffprobe -v quiet -print_format json -show_format -show_streams -show_chapters input.mp4
-
-# 以表格形式查看信息（更易读）
-ffprobe -v quiet -show_format -show_streams -of compact=p=0:nk=1 input.mp4
-
-# 查看章节信息
-ffprobe -v quiet -show_chapters -print_format json input.mp4
-
-# 查看元数据（标题、艺术家等）
-ffprobe -v quiet -show_format -show_entries format_tags -print_format json input.mp4
 ```
 
 ---
