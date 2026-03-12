@@ -11,32 +11,42 @@
 | **[ffmpeg-image-processing](./skills/ffmpeg-image-processing)** | 图片处理 | 格式转换、压缩、尺寸调整、裁剪、旋转、水印、特效等 |
 | **[ffmpeg-install](./skills/ffmpeg-install)** | 安装与检查 | 跨平台安装指南、环境检查、验证安装 |
 
-## 安装说明
+## 如何安装这些 Agent Skill
+
+这些技能是为 AI 助手（如 Trae AI）设计的，AI 助手会自动识别和加载这些技能。
+
+### 安装步骤
+
+1. **克隆或下载此仓库**
+   ```bash
+   git clone https://github.com/chunpu/ffmpeg-video-skill.git
+   ```
+
+2. **在 AI 助手的工作区中打开此项目**
+   - 在 Trae AI 或其他支持 skill 的 AI 助手中打开此文件夹
+
+3. **AI 助手自动发现并使用**
+   - AI 助手会自动扫描 `skills/` 目录下的所有 skill
+   - 每个 skill 目录下都有 `SKILL.md` 文件，定义了 skill 的功能和使用方法
+
+### Skill 目录结构
+
+每个 skill 都遵循以下结构：
+```
+skills/
+├── ffmpeg-video-processing/
+│   └── SKILL.md          # Skill 定义文件
+├── ffmpeg-audio-processing/
+│   └── SKILL.md
+├── ffmpeg-image-processing/
+│   └── SKILL.md
+└── ffmpeg-install/
+    └── SKILL.md
+```
 
 ### 前置条件
 
-首先需要安装 FFmpeg：
-
-```bash
-# macOS (使用 Homebrew)
-brew install ffmpeg
-
-# Ubuntu/Debian
-sudo apt install ffmpeg
-
-# Windows (使用 Chocolatey)
-choco install ffmpeg
-```
-
-详细的安装指南请参考 [ffmpeg-install](./skills/ffmpeg-install) 技能。
-
-### 技能使用
-
-这些技能是为 AI 助手（如 Trae AI）设计的，AI 助手会自动识别和加载这些技能。你只需要：
-
-1. 将此仓库克隆或下载到本地
-2. 在 AI 助手的工作区中打开此项目
-3. AI 助手会自动发现并使用这些技能
+在使用这些 skill 之前，需要先安装 FFmpeg。详细的安装指南请参考 [ffmpeg-install](./skills/ffmpeg-install) 技能。
 
 ## 技能特点
 
