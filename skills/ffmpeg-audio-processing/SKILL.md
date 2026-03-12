@@ -10,6 +10,13 @@ tags: ["ffmpeg", "audio", "processing", "conversion", "compression"]
 
 > 目标：提供最常用、最实用的 FFmpeg 音频处理命令，按需求频次从高到低排序
 
+## 0. 音频属性查看
+
+```bash
+# 查看音频属性
+ffmpeg -i input.mp3 2>&1
+```
+
 ## 1. 音频格式转换（最常用）
 
 ```bash

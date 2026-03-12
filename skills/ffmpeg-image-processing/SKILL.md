@@ -10,6 +10,13 @@ tags: ["ffmpeg", "image", "processing", "conversion", "compression"]
 
 > 目标：提供最常用、最实用的 FFmpeg 图片处理命令，按需求频次从高到低排序
 
+## 0. 图片属性查看
+
+```bash
+# 查看图片属性
+ffmpeg -i input.jpg 2>&1
+```
+
 ## 1. 图片格式转换（最常用）
 
 ```bash
