@@ -196,6 +196,87 @@ ffmpeg -i input.mp3 -af "silenceremove=stop_periods=1:stop_duration=1:stop_thres
 ffmpeg -i input.mp3 -af "silenceremove=start_periods=1:start_duration=1:start_threshold=-50dB:stop_periods=1:stop_duration=1:stop_threshold=-50dB" output.mp3
 ```
 
+## 音频去噪降噪
+
+```bash
+# 基础降噪（afftdn，频域降噪，适合大多数场景）
+ffmpeg -i input.mp3 -af "afftdn" output.mp3
+
+# 强力降噪（afftdn 调整参数）
+ffmpeg -i input.mp3 -af "afftdn=nf=-20:tn=-15" output.mp3
+
+# 高通滤波（去除低频噪音，如电流声、嗡嗡声）
+ffmpeg -i input.mp3 -af "highpass=f=80" output.mp3
+
+# 低通滤波（去除高频噪音，如嘶嘶声）
+ffmpeg -i input.mp3 -af "lowpass=f=10000" output.mp3
+
+# 带通滤波（只保留人声频率范围 300-3400Hz）
+ffmpeg -i input.mp3 -af "bandpass=f=1850:width=3100" output.mp3
+
+# 组合降噪（高通 + afftdn，效果更好）
+ffmpeg -i input.mp3 -af "highpass=f=80,afftdn" output.mp3
+
+# 降噪强度调节（0-1，0.5 为中等强度）
+ffmpeg -i input.mp3 -af "afftdn=nr=0.5" output.mp3
+
+# 去除齿音（deesser，适合人声）
+ffmpeg -i input.mp3 -af "deesser" output.mp3
+
+# 强力去齿音（调整参数）
+ffmpeg -i input.mp3 -af "deesser=i=0.5:m=0.8" output.mp3
+```
+
+## 去呼吸声与去回声
+
+```bash
+# 减少呼吸声（使用 compand 动态压缩）
+ffmpeg -i input.mp3 -af "compand=attacks=0.3:decays=1:points=-80/-80|-20/-20|0/-20" output.mp3
+
+# 去除轻微回声（使用 aecho 滤镜反向处理）
+ffmpeg -i input.mp3 -af "aecho=0.8:0.88:60:0.4" output.mp3
+
+# 减少房间混响（使用 afftdn 的降噪特性）
+ffmpeg -i input.mp3 -af "afftdn=tn=-10" output.mp3
+
+# 组合处理：去呼吸 + 去齿音 + 降噪
+ffmpeg -i input.mp3 -af "compand=attacks=0.3:decays=1:points=-80/-80|-20/-20|0/-20,deesser,afftdn" output.mp3
+```
+
+## 音高修正与变速变调
+
+```bash
+# 使用 rubberband 变速不变调（推荐，音质最好）
+# 2倍速，音调不变
+ffmpeg -i input.mp3 -af "rubberband=tempo=2.0" output.mp3
+
+# 0.5倍速，音调不变
+ffmpeg -i input.mp3 -af "rubberband=tempo=0.5" output.mp3
+
+# 变调不变速（升调 2 个半音）
+ffmpeg -i input.mp3 -af "rubberband=pitch=2.0" output.mp3
+
+# 变调不变速（降调 3 个半音）
+ffmpeg -i input.mp3 -af "rubberband=pitch=-3.0" output.mp3
+
+# 同时变速和变调（1.5倍速，升调 1 个半音）
+ffmpeg -i input.mp3 -af "rubberband=tempo=1.5:pitch=1.0" output.mp3
+
+# 使用 asetrate 简单变速（会同时变调）
+# 2倍速（音调也会升高）
+ffmpeg -i input.mp3 -af "asetrate=44100*2,aresample=44100" output.mp3
+
+# 降调不变速（使用 atempo + asetrate 组合）
+# 降调 1 个半音，速度不变
+ffmpeg -i input.mp3 -filter_complex "[0:a]asetrate=44100*0.94387[a];[a]atempo=1/0.94387" output.mp3
+
+# 音高修正模式（rubberband 的不同模式）
+# 音乐模式（默认）
+ffmpeg -i input.mp3 -af "rubberband=pitch=2.0:formants=crisp" output.mp3
+# 人声模式
+ffmpeg -i input.mp3 -af "rubberband=pitch=2.0:formants=shifted" output.mp3
+```
+
 ## 音频倒放
 
 ```bash
@@ -278,3 +359,13 @@ done
 | `amix=inputs=2` | 混合两个音频 |
 | `silencedetect` | 检测静音 |
 | `silenceremove` | 移除静音 |
+| `afftdn` | 频域降噪（基础） |
+| `afftdn=nf=-20:tn=-15` | 强力降噪 |
+| `highpass=f=80` | 高通滤波（去低频噪音） |
+| `lowpass=f=10000` | 低通滤波（去高频噪音） |
+| `bandpass=f=1850:width=3100` | 带通滤波（人声范围） |
+| `deesser` | 去齿音 |
+| `compand` | 动态压缩（去呼吸声） |
+| `rubberband=tempo=2.0` | 变速不变调 |
+| `rubberband=pitch=2.0` | 变调不变速 |
+| `asetrate=44100*2` | 变速（同时变调） |
